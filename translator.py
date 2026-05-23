@@ -7,8 +7,9 @@ from datacleanse import DataCleaner
 import epitran 
 
 # Use epitran to solidify two languages - English and German
+# primary class is for direct translation; translating individual words in / outwith dataset
 
-class Translator:
+class Translator():
     def __init__(self):
         print("Loading translation model (this might take a moment)...")
         self.model_name = "facebook/nllb-200-distilled-600M"
@@ -56,5 +57,5 @@ class Translator:
         
         return self.tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
 
-
+# Insert secondary class with Qwenn / Gemma series based on previous notebook
 
