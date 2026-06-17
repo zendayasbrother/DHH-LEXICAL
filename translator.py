@@ -4,7 +4,6 @@ from langdetect import detect
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 from datacleanse import DataCleaner
-import epitran 
 
 # Use epitran to solidify two languages - English and German
 # primary class is for direct translation; translating individual words in / outwith dataset
@@ -12,7 +11,7 @@ import epitran
 class Translator():
     def __init__(self):
         print("Loading translation model (this might take a moment)...")
-        self.model_name = "facebook/nllb-200-distilled-600M"
+        self.model_name = "facebook/nllb-200-distilled-600M" # for direct translation
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForSeq2SeqLM.from_pretrained(self.model_name)
         
@@ -38,8 +37,8 @@ class Translator():
 
     def translate(self, text, source='auto', target='en'):
         # Translates text using NLLB mapping codes.
-        src_lang_code = self.LANG_MAP.get(source, "eng_Latn") 
-        tgt_lang_code = self.LANG_MAP.get(target, "eng_Latn") 
+        src_lang_code = self.LANG_MAP.get(source, "eng_Latn") # English for the dataset
+        tgt_lang_code = self.LANG_MAP.get(target, "deu_Latn") # German for demo purposes but will make flexible
 
         # Prepare tokenizer configuration
         self.tokenizer.src_lang = src_lang_code
@@ -57,5 +56,5 @@ class Translator():
         
         return self.tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
 
-# Insert secondary class with Qwenn / Gemma series based on previous notebook
+# Insert secondary class with Qwen series based on previous notebook
 
