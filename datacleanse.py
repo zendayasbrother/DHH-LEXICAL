@@ -29,6 +29,6 @@ class DataCleaner:
       
       # display count of missing values#
       print("\n Missing values count: ")
-      print(self.df.isnull().sum().reset_index(name = 'Missing Values Counted')) 
+      print(self.df.isnull().sum().reset_index(name = 'Missing Values Counted')) # process and clean individually before merging / concatenating
 
   
